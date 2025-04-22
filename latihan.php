@@ -41,17 +41,5 @@
     echo "Luas lingkaran dengan jari-jari $jari_jari = " . round($luas, 2);
     ?>
 
-    <hr>
-
-    <h2>5. Menampilkan List Perkalian 1 sampai 5</h2>
-    <?php
-    for ($i = 1; $i <= 5; $i++) {
-        echo "Perkalian $i:<br>";
-        for ($j = 1; $j <= 10; $j++) {
-            echo "$i x $j = " . ($i * $j) . "<br>";
-        }
-        echo "<br>";
-    }
-    ?>
 </body>
 </html>
