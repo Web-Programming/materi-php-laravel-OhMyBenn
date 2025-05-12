@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title')</title>
+    <title>App</title>
+    <!-- Link AdminLTE CSS -->
+    <link rel="stylesheet" href="{{ asset('adminlte/css/adminlte.min.css') }}">
 </head>
-<body>
-    <h1>{{ $kampus }}</h1>
-    <hr>
-    @yield('content')
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @yield('content')
+    </div>
 
-    <hr>
-    @copy; {{ date('Y') }} Universitas Multi Data Palembang
+    <!-- AdminLTE JS -->
+    <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
 </body>
 </html>

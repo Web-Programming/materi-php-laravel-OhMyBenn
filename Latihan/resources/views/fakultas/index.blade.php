@@ -1,34 +1,35 @@
-@include('layout.header', ['title' => 'Halaman Fakultas'])
+@extends('layouts.master')
 
-<h2>Fakultas</h2>
-<ul>
-    @if (count($fakultas) > 0)
-        @foreach ($fakultas as $item)
-            <li> {{ $item }} </li>
-        @endforeach
-    @else
-        <li>Belum ada data</li>
-    @endif
-</ul>
-
-@include('layout.footer')
-
-{{--@include('layout.header', ['title' => 'Halaman Fakultas'])--}}
-
-@extends('layout.master')
-@section('title', 'Halaman Fakultas')
+@section('title', 'Daftar {{ ucfirst($fakultas) }}')
 
 @section('content')
-<h2>Fakultas</h2>
-<ul>
-    @if (count($fakultas) > 0)
-        @foreach ($fakultas as $item)
-            <li> {{ $item }} </li>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Daftar {{ ucfirst($fakultas) }}</h3>
+    <a href="{{ route('$fakultas.create') }}" class="btn btn-primary float-right">Tambah</a>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nama</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach(${{ $fakultas }} as $item)
+        <tr>
+          <td>{{ $item->id }}</td>
+          <td>{{ $item->nama ?? $item->judul ?? '-' }}</td>
+          <td>
+            <a href="{{ route('$fakultas.show', $item->id) }}" class="btn btn-info btn-sm">Detail</a>
+            <a href="{{ route('$fakultas.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{{ route('$fakultas.destroy', $item->id) }}" class="btn btn-danger btn-sm">Hapus</a>
+          </td>
+        </tr>
         @endforeach
-    @else
-        <li>Belum ada data</li>
-    @endif
-</ul>
+      </tbody>
+    </table>
+  </div>
+</div>
 @endsection
-
-{{--@include('layout.footer')--}}
