@@ -15,9 +15,27 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+       // insert data user
+       DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => Str::random(10).'@example.com',
+            'password' => Hash::make('password'),
+       ]);
+
+         // insert data mahasiswa menggunakan query builder
+        DB::table('_benn')->insert(
+            [
+            'npm' => '2022101010',
+            'nama_mahasiswa' => 'Benn',
+            'tempat_lahir' => 'Palembang',
+            'tanggal_lahir' => '2006-08-28',
+            'alamat' => 'Jl. HBR Motik',
+            ]
+        );
+        //retrive all data
+        Mahasiswa::all();
+        Mahasiswa::where('id', '<', 3)->get(); //select * from mahasiswa where id < 3
+        Mahasiswa::select(['npm','nama']
+        );
     }
 }
