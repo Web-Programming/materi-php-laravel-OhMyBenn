@@ -43,6 +43,12 @@
   <!--begin::Body-->
   <body class="register-page bg-body-secondary">
     <div class="register-box">
+      <select name="level" required>
+    <option value="user">User</option>
+    <option value="mahasiswa">Mahasiswa</option>
+    <option value="dosen">Dosen</option>
+    <option value="admin">Admin</option>
+    </select>
       <!-- /.register-logo -->
       <div class="card card-outline card-primary">
         <div class="card-header">

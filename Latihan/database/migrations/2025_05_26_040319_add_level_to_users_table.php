@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string("level", 50)->after("password");
-        });
+        // Adding a new column 'level' to the 'users' table with default value 'user'
+    Schema::table('users', function (Blueprint $table) {
+        $table->enum('level', ['admin', 'user', 'mahasiswa', 'dosen'])->default('user');
+    });
     }
 
+ 
     /**
      * Reverse the migrations.
      */

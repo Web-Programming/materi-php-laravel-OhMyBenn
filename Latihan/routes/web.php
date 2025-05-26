@@ -57,3 +57,27 @@ Route::group(['middleware' => ['auth']], function(){
 Route::get('/admin', function () {
     // ...
 })->middleware('ceklogin:admin');
+
+// Admin: akses semua
+Route::middleware(['auth', 'ceklevel:admin'])->group(function () {
+    Route::get('/admin', fn () => 'Halaman Admin');
+    Route::resource('/materi', MateriController::class);
+    Route::resource('/mahasiswa', MahasiswaController::class);
+    Route::resource('/dosen', DosenController::class);
+});
+
+// User: hanya dashboard
+Route::middleware(['auth', 'ceklevel:user'])->group(function () {
+    Route::get('/dashboard', fn () => 'Dashboard User');
+});
+
+// Dosen: materi dan mahasiswa
+Route::middleware(['auth', 'ceklevel:dosen'])->group(function () {
+    Route::resource('/materi', MateriController::class);
+    Route::resource('/mahasiswa', MahasiswaController::class);
+});
+
+// Mahasiswa: hanya materi
+Route::middleware(['auth', 'ceklevel:mahasiswa'])->group(function () {
+    Route::resource('/materi', MateriController::class);
+});
