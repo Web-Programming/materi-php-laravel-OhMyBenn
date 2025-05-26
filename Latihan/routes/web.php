@@ -53,3 +53,7 @@ Route::group(['middleware' => ['auth']], function(){
         Route::get("/user", [UserController::class, 'index']);
     });
 });
+
+Route::get('/admin', function () {
+    // ...
+})->middleware('ceklogin:admin');

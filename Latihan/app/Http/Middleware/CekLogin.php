@@ -5,20 +5,24 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth; // <- ini penting
 
 class CekLogin
 {
-     /**
+    /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string  $roles
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handle(Request $request, Closure $next, string $roles): Response
     {
-        //cek apakah user sudah login
-        if(Auth::check()){
-            //cek apakah level admin atau uses (sesuai dengan roles yang di passing)
-            if(Auth::user()->level === $roles){
+        // Cek apakah user sudah login
+        if (Auth::check()) {
+            // Cek apakah level sesuai dengan role yang dipassing
+            if (Auth::user()->level === $roles) {
                 return $next($request);
             }
         }
