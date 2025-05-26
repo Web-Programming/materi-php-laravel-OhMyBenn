@@ -2,59 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Materi;
 use Illuminate\Http\Request;
 
 class MateriController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $materi = Materi::all();
-        return view('materi.index', compact('materi'));
+        return view("materi.index");
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('materi.create');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-        ]);
-
-        Materi::create(['nama' => $request->nama]);
-
-        return redirect()->route('materi.index')->with('success', 'Data berhasil ditambahkan.');
+        //
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $item = Materi::findOrFail($id);
-        return view('materi.show', compact('item'));
+        //
     }
 
-    public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $item = Materi::findOrFail($id);
-        return view('materi.create', compact('item'));
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $request->validate(['nama' => 'required|string|max:255']);
-        $item = Materi::findOrFail($id);
-        $item->update(['nama' => $request->nama]);
-
-        return redirect()->route('materi.index')->with('success', 'Data berhasil diubah.');
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        $item = Materi::findOrFail($id);
-        $item->delete();
-
-        return redirect()->route('materi.index')->with('success', 'Data berhasil dihapus.');
+        //
     }
 }

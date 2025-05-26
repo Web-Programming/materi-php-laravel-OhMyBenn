@@ -7,51 +7,69 @@ use Illuminate\Http\Request;
 
 class FakultasController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $fakultas = Fakultas::all();
-        return view('fakultas.index', compact('fakultas'));
+        $listfakultas = Fakultas::all(); //select * from fakultas;
+        return view("fakultas.index", 
+            ['listfakultas' => $listfakultas]
+        );
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('fakultas.create');
+        return view("fakultas.create");
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate(['nama' => 'required|string|max:255']);
-        Fakultas::create(['nama' => $request->nama]);
-
-        return redirect()->route('fakultas.index')->with('success', 'Data berhasil ditambahkan.');
+         //Form Validation
+        $data = $request->validate([
+            'nama' => 'required|min:3|max:4'
+        ]);
+        Fakultas::insert([
+            'nama' => $data['nama'],
+        ]);
+        return redirect("fakultas")->with("status", "Fakultas berhasil disimpan!");
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $item = Fakultas::findOrFail($id);
-        return view('fakultas.show', compact('item'));
+        //
     }
 
-    public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $item = Fakultas::findOrFail($id);
-        return view('fakultas.create', compact('item'));
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $request->validate(['nama' => 'required|string|max:255']);
-        $item = Fakultas::findOrFail($id);
-        $item->update(['nama' => $request->nama]);
-
-        return redirect()->route('fakultas.index')->with('success', 'Data berhasil diubah.');
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        $item = Fakultas::findOrFail($id);
-        $item->delete();
-
-        return redirect()->route('fakultas.index')->with('success', 'Data berhasil dihapus.');
+        //
     }
 }
